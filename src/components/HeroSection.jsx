@@ -1,10 +1,10 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Play, Zap, Cloud, Shield } from "lucide-react";
-import heroShowcase from "@/assets/hero-showcase.jpg";
+import HeroRight from "@/components/HeroRight";
 
 const HeroSection = () => {
   return (
-    <section className="relative min-h-screen flex items-center section-padding pt-32 overflow-hidden">
+    <section id="home" className="relative min-h-screen flex items-center section-padding pt-24 overflow-hidden">
       <div className="absolute inset-0 bg-glow-radial pointer-events-none" />
       <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
 
@@ -15,7 +15,7 @@ const HeroSection = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7 }}
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border bg-secondary mb-8">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border bg-secondary mt-8 mb-8">
               <span className="text-primary">✦</span>
               <span className="text-sm text-muted-foreground">AI-Powered. Dev-Approved.</span>
             </div>
@@ -32,9 +32,9 @@ const HeroSection = () => {
             </p>
 
             <div className="flex flex-wrap gap-4 mb-12">
-              <button className="inline-flex items-center gap-2 px-7 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors">
+              <a href="#contact" className="inline-flex items-center gap-2 px-7 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors">
                 Start a Project <ArrowRight size={18} />
-              </button>
+              </a>
               <button className="inline-flex items-center gap-2 px-7 py-3 rounded-lg font-medium border border-border text-foreground hover:border-primary/50 transition-colors">
                 <Play size={18} /> Watch Our Work
               </button>
@@ -59,17 +59,7 @@ const HeroSection = () => {
             </div>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            className="relative"
-          >
-            <div className="relative rounded-xl overflow-hidden glow-border">
-              <img src={heroShowcase} alt="GrassFront showcase" width={1280} height={800} className="w-full h-auto" />
-              <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent" />
-            </div>
-          </motion.div>
+          <HeroRight />
         </div>
 
         <motion.div
@@ -80,7 +70,7 @@ const HeroSection = () => {
         >
           <p className="text-xs tracking-[0.3em] text-muted-foreground mb-8 uppercase">Trusted by builders at</p>
           <div className="flex flex-wrap justify-center items-center gap-10 text-muted-foreground/60">
-            {["▲ Vercel", "NEXT.js", "⌇ tailwindcss", "⚡ supabase", "◎ GitHub"].map((name) => (
+            {["▲ Vercel", "React.js", "⌇ tailwindcss", "mongoDB", "◎ GitHub"].map((name) => (
               <span key={name} className="text-lg font-semibold tracking-wide">{name}</span>
             ))}
           </div>

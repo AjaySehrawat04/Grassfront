@@ -19,13 +19,13 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="use-cases" className="section-padding relative">
+    <section id="contact" className="section-padding relative">
       <div className="container mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-8"
         >
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-border bg-secondary mb-4">
             <Headphones size={14} className="text-primary" />
@@ -48,7 +48,7 @@ const ContactSection = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="flex items-center gap-4 p-5 rounded-xl glow-border glow-border-hover bg-card cursor-pointer group transition-all"
+                className="contact-card flex items-center gap-4 p-5 rounded-xl glow-border bg-card cursor-pointer group"
               >
                 <div className="w-12 h-12 rounded-full icon-glow flex items-center justify-center shrink-0">
                   <opt.icon size={22} className="text-primary" />
@@ -132,7 +132,7 @@ const ContactSection = () => {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-16 rounded-xl glow-border bg-card overflow-hidden"
+          className="mt-8 rounded-xl glow-border bg-card overflow-hidden"
         >
           <div className="grid md:grid-cols-[1fr_2fr] items-center">
             <div className="h-48 md:h-full overflow-hidden">

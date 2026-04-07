@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { motion, useInView } from "framer-motion";
 import { Rocket, BarChart3, Handshake, Users, TrendingUp, Target } from "lucide-react";
 
 const reasons = [
@@ -8,10 +9,40 @@ const reasons = [
 ];
 
 const stats = [
-  { icon: Users, value: "50+", label: "Projects Delivered" },
-  { icon: TrendingUp, value: "98%", label: "Client Satisfaction" },
-  { icon: Target, value: "10+", label: "Industries Served" },
+  { icon: Users, value: "50+", label: "Projects Delivered", numericVal: 50 },
+  { icon: TrendingUp, value: "98%", label: "Client Satisfaction", numericVal: 98 },
+  { icon: Target, value: "10+", label: "Industries Served", numericVal: 10 },
 ];
+
+/* ── Animated counter that counts up on scroll ── */
+const AnimatedCounter = ({ target, suffix = "" }) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (!isInView) return;
+    let start = 0;
+    const duration = 1800;
+    const startTime = performance.now();
+    const step = (now) => {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      // Ease out cubic
+      const eased = 1 - Math.pow(1 - progress, 3);
+      start = Math.round(eased * target);
+      setCount(start);
+      if (progress < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }, [isInView, target]);
+
+  return (
+    <span ref={ref} className="text-3xl font-bold text-gradient-blue tabular-nums">
+      {count}{suffix}
+    </span>
+  );
+};
 
 const WhySection = () => {
   return (
@@ -28,20 +59,30 @@ const WhySection = () => {
               Why<br /><span className="text-gradient-blue">GrassFront</span>?
             </h2>
             <div className="w-12 h-1 bg-primary rounded mb-8" />
-            <p className="text-muted-foreground text-lg mb-12 max-w-md">
+            <p className="text-muted-foreground text-lg mb-6 max-w-md">
               We go beyond code. We build technology that drives real business growth and lasting impact.
             </p>
             <div className="flex flex-wrap gap-8">
-              {stats.map((s) => (
-                <div key={s.label} className="text-center">
+              {stats.map((s, i) => (
+                <motion.div
+                  key={s.label}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.2 + i * 0.15, duration: 0.5 }}
+                  className="text-center stat-counter"
+                >
                   <div className="flex items-center gap-2 mb-1">
-                    <div className="w-8 h-8 rounded-full icon-glow flex items-center justify-center">
+                    <div className="w-8 h-8 rounded-full icon-glow flex items-center justify-center animate-pulse-glow">
                       <s.icon size={14} className="text-primary" />
                     </div>
-                    <span className="text-3xl font-bold text-gradient-blue">{s.value}</span>
+                    <AnimatedCounter
+                      target={s.numericVal}
+                      suffix={s.value.includes("%") ? "%" : "+"}
+                    />
                   </div>
                   <p className="text-xs text-muted-foreground">{s.label}</p>
-                </div>
+                </motion.div>
               ))}
             </div>
           </motion.div>
@@ -50,11 +91,11 @@ const WhySection = () => {
             {reasons.map((r, i) => (
               <motion.div
                 key={r.title}
-                initial={{ opacity: 0, x: 30 }}
+                initial={{ opacity: 0, x: 40 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.15 }}
-                className="flex gap-6 items-start"
+                transition={{ delay: i * 0.18, duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
+                className="why-card flex gap-6 items-start p-4 rounded-xl cursor-pointer"
               >
                 <div className="w-16 h-16 rounded-full icon-glow flex items-center justify-center shrink-0 animate-pulse-glow">
                   <r.icon size={28} className="text-primary" />
@@ -62,7 +103,13 @@ const WhySection = () => {
                 <div>
                   <h3 className="text-xl font-bold text-foreground mb-2 whitespace-pre-line">{r.title}</h3>
                   <p className="text-muted-foreground text-sm">{r.desc}</p>
-                  <div className="w-8 h-0.5 bg-primary rounded mt-4" />
+                  <motion.div
+                    className="h-0.5 bg-primary rounded mt-4"
+                    initial={{ width: 0 }}
+                    whileInView={{ width: 32 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.3 + i * 0.18, duration: 0.6, ease: "easeOut" }}
+                  />
                 </div>
               </motion.div>
             ))}

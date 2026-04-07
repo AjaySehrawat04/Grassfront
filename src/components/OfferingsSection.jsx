@@ -16,13 +16,13 @@ const offerings = [
 
 const OfferingsSection = () => {
   return (
-    <section className="section-padding relative">
+    <section id="pricing" className="section-padding relative">
       <div className="container mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-8"
         >
           <span className="text-primary text-sm font-semibold tracking-widest uppercase">What We Do</span>
           <h2 className="text-3xl md:text-5xl font-bold font-display mt-4">
@@ -35,19 +35,28 @@ const OfferingsSection = () => {
           {offerings.map((o, i) => (
             <motion.div
               key={o.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 40, scale: 0.96 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.08 }}
-              className="rounded-xl glow-border glow-border-hover bg-card overflow-hidden group cursor-pointer transition-all"
+              transition={{
+                delay: i * 0.1,
+                duration: 0.55,
+                ease: [0.25, 0.46, 0.45, 0.94],
+              }}
+              className="offering-card rounded-xl glow-border bg-card overflow-hidden group cursor-pointer"
             >
-              <div className="relative h-40 overflow-hidden">
-                <img src={o.img} alt={o.title} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80" />
-                <div className="absolute top-3 left-3 w-8 h-8 rounded-lg icon-glow flex items-center justify-center">
+              <div className="relative h-40 overflow-hidden z-[3]">
+                <img
+                  src={o.img}
+                  alt={o.title}
+                  loading="lazy"
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out opacity-80"
+                />
+                <div className="absolute top-3 left-3 w-8 h-8 rounded-lg icon-glow flex items-center justify-center transition-all duration-300 group-hover:shadow-[0_0_24px_hsl(217_91%_55%/0.5)]">
                   <o.icon size={14} className="text-primary" />
                 </div>
               </div>
-              <div className="p-6">
+              <div className="p-6 relative z-[3]">
                 <h3 className="text-xl font-bold text-foreground mb-2">{o.title}</h3>
                 <p className="text-sm text-muted-foreground mb-4">{o.desc}</p>
                 <span className="text-xs font-bold tracking-widest text-primary">{o.tag}</span>

@@ -21,13 +21,13 @@ const categories = [
 
 const MediaSection = () => {
   return (
-    <section className="section-padding relative overflow-hidden">
+    <section id="docs" className="section-padding relative overflow-hidden">
       <div className="container mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          className="text-center mb-6"
         >
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-border bg-secondary mb-4">
             <span className="w-2 h-2 rounded-full bg-primary" />
@@ -53,14 +53,34 @@ const MediaSection = () => {
           {articles.map((a, i) => (
             <motion.div
               key={a.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.08 }}
-              className={`rounded-xl glow-border glow-border-hover bg-card overflow-hidden group cursor-pointer ${a.featured ? "sm:col-span-1" : ""}`}
+              initial={{
+                opacity: 0,
+                y: 30,
+                filter: "blur(8px)",
+                scale: 0.96,
+              }}
+              whileInView={{
+                opacity: 1,
+                y: 0,
+                filter: "blur(0px)",
+                scale: 1,
+              }}
+              viewport={{ once: true, margin: "-30px" }}
+              transition={{
+                delay: i * 0.1,
+                duration: 0.65,
+                ease: [0.25, 0.46, 0.45, 0.94],
+                filter: { duration: 0.8 },
+              }}
+              className={`media-card rounded-xl glow-border bg-card overflow-hidden group cursor-pointer ${a.featured ? "sm:col-span-1 media-shimmer" : ""}`}
             >
               <div className="relative h-40 overflow-hidden">
-                <img src={a.img} alt={a.title} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                <img
+                  src={a.img}
+                  alt={a.title}
+                  loading="lazy"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
                 <div className="absolute top-2 left-2 flex items-center gap-1 px-2 py-0.5 rounded bg-primary/20 backdrop-blur text-xs font-bold text-primary">
                   {a.featured && <Star size={10} />} {a.tag}
                 </div>
@@ -76,10 +96,17 @@ const MediaSection = () => {
         </div>
 
         <div className="flex flex-wrap justify-center gap-4 mt-12">
-          {categories.map((c) => (
-            <button key={c.label} className="flex items-center gap-2 px-5 py-2.5 rounded-full border border-border text-sm text-muted-foreground hover:border-primary/50 hover:text-foreground transition-colors">
+          {categories.map((c, i) => (
+            <motion.button
+              key={c.label}
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 + i * 0.06 }}
+              className="flex items-center gap-2 px-5 py-2.5 rounded-full border border-border text-sm text-muted-foreground hover:border-primary/50 hover:text-foreground transition-colors"
+            >
               <c.icon size={16} className="text-primary" /> {c.label}
-            </button>
+            </motion.button>
           ))}
         </div>
       </div>

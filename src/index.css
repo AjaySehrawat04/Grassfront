@@ -43,6 +43,9 @@
 }
 
 @layer base {
+  html {
+    @apply scroll-smooth;
+  }
   * {
     @apply border-border;
   }
@@ -68,11 +71,259 @@
     background: radial-gradient(ellipse at center, hsl(217 91% 50% / 0.08) 0%, transparent 70%);
   }
   .section-padding {
-    @apply py-20 md:py-28 px-4 md:px-8;
+    @apply py-10 md:py-14 px-4 md:px-8;
   }
   .icon-glow {
     background: hsl(217 91% 50% / 0.1);
     border: 1px solid hsl(217 91% 50% / 0.3);
     box-shadow: 0 0 20px hsl(217 91% 50% / 0.15);
   }
+}
+
+/* ═══════════════════════════════════════════════════
+   Premium Section-Specific Animations
+   Each keyframe is used by ONE section only.
+   ═══════════════════════════════════════════════════ */
+
+/* ── About Section: Light sweep across card ─────── */
+@keyframes sweep-light {
+  0%   { transform: translateX(-100%) skewX(-15deg); }
+  100% { transform: translateX(200%) skewX(-15deg); }
+}
+.about-card {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              box-shadow 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              border-color 0.45s ease;
+}
+.about-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(100, 160, 255, 0.08) 40%,
+    rgba(100, 160, 255, 0.15) 50%,
+    rgba(100, 160, 255, 0.08) 60%,
+    transparent 100%
+  );
+  transform: translateX(-100%) skewX(-15deg);
+  pointer-events: none;
+  z-index: 2;
+}
+.about-card:hover::after {
+  animation: sweep-light 0.7s ease-out forwards;
+}
+.about-card:hover {
+  transform: scale(1.04) translateY(-4px);
+  border-color: hsl(217 91% 60% / 0.6) !important;
+  box-shadow:
+    0 0 30px hsl(217 91% 55% / 0.2),
+    0 20px 50px rgba(0, 20, 80, 0.5),
+    inset 0 0 30px hsl(217 91% 55% / 0.06);
+}
+.about-card:hover .icon-glow {
+  box-shadow: 0 0 28px hsl(217 91% 55% / 0.4);
+  border-color: hsl(217 91% 60% / 0.6);
+}
+
+/* ── Offerings Section: Neon border spin ────────── */
+@keyframes neon-border-spin {
+  0%   { --neon-angle: 0deg;   }
+  100% { --neon-angle: 360deg; }
+}
+@property --neon-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+.offering-card {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.4s ease;
+}
+.offering-card::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: conic-gradient(
+    from var(--neon-angle),
+    transparent 0%,
+    hsl(217 100% 60% / 0.6) 10%,
+    hsl(250 100% 70% / 0.4) 20%,
+    transparent 30%,
+    transparent 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: neon-border-spin 4s linear infinite;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+.offering-card:hover::before {
+  opacity: 1;
+}
+.offering-card:hover {
+  transform: scale(1.03) translateY(-6px);
+  box-shadow:
+    0 0 35px hsl(217 91% 55% / 0.18),
+    0 24px 60px rgba(0, 15, 70, 0.55);
+}
+/* Light sweep overlay for offerings */
+.offering-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    105deg,
+    transparent 30%,
+    rgba(130, 180, 255, 0.06) 45%,
+    rgba(130, 180, 255, 0.12) 50%,
+    rgba(130, 180, 255, 0.06) 55%,
+    transparent 70%
+  );
+  transform: translateX(-120%);
+  pointer-events: none;
+  z-index: 2;
+  transition: none;
+}
+.offering-card:hover::after {
+  animation: sweep-light 0.6s 0.1s ease-out forwards;
+}
+
+/* ── Process Section: Timeline draw + step ping ── */
+@keyframes timeline-draw {
+  from { transform: scaleY(0); }
+  to   { transform: scaleY(1); }
+}
+@keyframes step-ping {
+  0%, 100% { box-shadow: 0 0 0 0 hsl(217 91% 55% / 0.5); }
+  50%      { box-shadow: 0 0 0 10px hsl(217 91% 55% / 0); }
+}
+.process-step {
+  transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              box-shadow 0.35s ease;
+}
+.process-step:hover {
+  transform: translateX(6px);
+  box-shadow: 0 0 25px hsl(217 91% 55% / 0.12),
+              0 12px 35px rgba(0, 10, 60, 0.4);
+}
+
+/* ── Why Section: Magnetic lift + hover ──────────── */
+.why-card {
+  transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              box-shadow 0.35s ease;
+}
+.why-card:hover {
+  transform: translateY(-8px) skewY(-0.5deg);
+}
+
+/* ── Expertise Section: 3D Flip Card ─────────────── */
+.flip-card-container {
+  perspective: 1200px;
+}
+.flip-card-inner {
+  position: relative;
+  transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
+  transform-style: preserve-3d;
+}
+.flip-card-container:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+.flip-card-front,
+.flip-card-back {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.flip-card-back {
+  position: absolute;
+  inset: 0;
+  transform: rotateY(180deg);
+}
+
+/* ── Media Section: Blur reveal ──────────────────── */
+@keyframes shimmer-featured {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.media-card {
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              box-shadow 0.4s ease,
+              border-color 0.4s ease;
+}
+.media-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 0 20px hsl(217 91% 55% / 0.15),
+              0 16px 40px rgba(0, 10, 60, 0.45);
+  border-color: hsl(217 91% 55% / 0.4);
+}
+.media-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+.media-shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(100, 160, 255, 0.1) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer-featured 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* ── Contact Section: Subtle lift ────────────────── */
+.contact-card {
+  transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              box-shadow 0.35s ease,
+              border-color 0.35s ease;
+}
+.contact-card:hover {
+  transform: translateY(-4px) translateX(4px);
+  border-color: hsl(217 91% 55% / 0.5) !important;
+  box-shadow: 0 0 20px hsl(217 91% 55% / 0.12),
+              0 12px 30px rgba(0, 10, 50, 0.4);
+}
+
+/* ── Animated counter (Why Section) ──────────────── */
+@keyframes counter-pop {
+  0%   { transform: scale(0.8); opacity: 0; }
+  60%  { transform: scale(1.05); }
+  100% { transform: scale(1); opacity: 1; }
+}
+.stat-counter {
+  animation: counter-pop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+/* ── Global: Pulse glow for live indicators ──────── */
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 8px hsl(217 91% 55% / 0.3); }
+  50%      { box-shadow: 0 0 20px hsl(217 91% 55% / 0.6); }
+}
+.animate-pulse-glow {
+  animation: pulse-glow 2.5s ease-in-out infinite;
+}
+
+/* ── Utilities ───────────────────────────────────── */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
