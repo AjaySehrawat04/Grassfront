@@ -1,15 +1,17 @@
 import { motion } from "framer-motion";
 import { Wrench, Code, Smartphone, Monitor, Cpu, Plus, ArrowRight } from "lucide-react";
-import serviceBespoke from "@/assets/service-bespoke.jpg";
-import serviceApps from "@/assets/service-apps.jpg";
-import serviceAutomation from "@/assets/service-automation.jpg";
+import serviceBespoke from "@/assets/services-bespoke.jpeg";
+import serviceApps from "@/assets/services-smartApp.jpeg";
+import serviceAutomation from "@/assets/services-automation.jpeg";
 import serviceMore from "@/assets/service-more.jpg";
+import serviceWeb from "@/assets/services-web.jpeg";
+import serviceEnterprise from "@/assets/services-enterprise.jpeg";
 
 const offerings = [
   { icon: Wrench, img: serviceBespoke, title: "Bespoke Solutions", desc: "Custom-built software engineered around business logic, scalability, and long-term performance.", tag: "CUSTOMIZATION" },
-  { icon: Code, img: serviceBespoke, title: "Web Platform", desc: "Secure, cloud-ready web platforms designed for reliability, speed, and enterprise growth.", tag: "DIGITAL PLATFORMS" },
+  { icon: Code, img: serviceWeb, title: "Web Platform", desc: "Secure, cloud-ready web platforms designed for reliability, speed, and enterprise growth.", tag: "DIGITAL PLATFORMS" },
   { icon: Smartphone, img: serviceApps, title: "Smart Apps", desc: "AI-enabled mobile applications delivering intelligent experiences and real-time insights.", tag: "MOBILITY" },
-  { icon: Monitor, img: serviceBespoke, title: "Enterprise Systems", desc: "Robust enterprise systems that integrate operations, data, and decision-making.", tag: "ENTERPRISE" },
+  { icon: Monitor, img: serviceEnterprise, title: "Enterprise Systems", desc: "Robust enterprise systems that integrate operations, data, and decision-making.", tag: "ENTERPRISE" },
   { icon: Cpu, img: serviceAutomation, title: "Intelligent Automation", desc: "Automation powered by intelligence to optimize workflows and operational efficiency.", tag: "AUTOMATION" },
   { icon: Plus, img: serviceMore, title: "Many More", desc: "Extended digital capabilities aligned with evolving technologies and business demands.", tag: "EXTENSIONS" },
 ];

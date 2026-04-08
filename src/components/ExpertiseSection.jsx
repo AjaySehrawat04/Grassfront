@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Pencil, Code, Zap, Shield, ArrowUpRight } from "lucide-react";
-import heroShowcase from "@/assets/hero-showcase.png";
+import uxui from "@/assets/ux-ui.jpeg";
+import frontendBackend from "@/assets/frontend-backend.jpeg";
 
 const expertiseItems = [
   {
@@ -8,12 +9,14 @@ const expertiseItems = [
     desc: "Crafting intuitive user journeys with pixel-perfect UI that captivates and converts.",
     tags: ["UX / UI", "Figma", "Adobe XD"],
     icon: Pencil,
+    image: uxui,
   },
   {
     title: "Frontend &\nBackend",
     desc: "Building robust, scalable architectures for modern web apps with cutting-edge stacks.",
     tags: ["React", "Node.js", "JavaScript"],
     icon: Code,
+    image: frontendBackend,
   },
 ];
 
@@ -48,7 +51,7 @@ const ExpertiseSection = () => {
                 {/* ── Front Face ── */}
                 <div className="flip-card-front rounded-xl glow-border bg-card p-8 flex flex-col md:flex-row items-center gap-8 overflow-hidden w-full h-full">
                   <div className="relative w-full md:w-1/2 h-48 rounded-lg overflow-hidden">
-                    <img src={heroShowcase} alt={item.title} loading="lazy" className="w-full h-full object-cover opacity-70" />
+                    <img src={item.image} alt={item.title} loading="lazy" className="w-full h-full object-cover opacity-90 brightness-110" />
                     <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent" />
                   </div>
                   <div className="flex-1">
@@ -70,7 +73,7 @@ const ExpertiseSection = () => {
                   style={{ background: "linear-gradient(135deg, hsl(225 25% 8%), hsl(230 30% 10%))" }}
                 >
                   <div className="relative w-full md:w-1/2 h-48 rounded-lg overflow-hidden">
-                    <img src={heroShowcase} alt={item.title} loading="lazy" className="w-full h-full object-cover opacity-50" />
+                    <img src={item.image} alt={item.title} loading="lazy" className="w-full h-full object-cover opacity-75 brightness-105" />
                     <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent" />
                     <div className="absolute inset-0 flex items-center justify-center">
                       <div className="w-14 h-14 rounded-full icon-glow flex items-center justify-center animate-pulse-glow">

@@ -2,47 +2,31 @@ import { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
 
-import imgEnterprise from "@/assets/service-enterprise.jpg";
-import imgWeb from "@/assets/service-web.jpg";
-import imgAutomation from "@/assets/service-automation.jpg";
-import imgApps from "@/assets/service-apps.jpg";
-import imgBespoke from "@/assets/service-bespoke.jpg";
+import imgBizzStudio from "@/assets/projects-Bizz-Studio.jpg";
+import imgHorecaMall from "@/assets/projects-Horeca-Mall.jpg";
+import imgPlatter from "@/assets/projects-Platter.jpg";
+import imgBizzeasy from "@/assets/projects-bizzeazy.jpg";
 
 const projects = [
   {
     id: 1,
-    title: "Global FinTech Hub",
-    description: "Enterprise payment processing platform processing $10M+ daily.",
-    image: imgEnterprise,
-    tag: "FINANCE"
+    title: "Bizz Studio",
+    image: imgBizzStudio,
   },
   {
     id: 2,
-    title: "AI Health Assistant",
-    description: "Machine learning application for predictive diagnostic insights.",
-    image: imgApps,
-    tag: "HEALTHCARE"
+    title: "Horeca Mall",
+    image: imgHorecaMall,
   },
   {
     id: 3,
-    title: "EcoLogistics SaaS",
-    description: "Global supply chain tracking with real-time carbon footprint metrics.",
-    image: imgWeb,
-    tag: "LOGISTICS"
+    title: "Platter",
+    image: imgPlatter,
   },
   {
     id: 4,
-    title: "Smart Mfg Grid",
-    description: "Automated factory floor monitoring and predictive maintenance system.",
-    image: imgAutomation,
-    tag: "INDUSTRIALS"
-  },
-  {
-    id: 5,
-    title: "Cloud Commerce",
-    description: "Scalable global e-commerce engine with real-time inventory multi-region syncing.",
-    image: imgBespoke,
-    tag: "RETAIL"
+    title: "Bizzeazy",
+    image: imgBizzeasy,
   }
 ];
 
@@ -158,20 +142,17 @@ const ProjectsSection = () => {
                       <img 
                         src={project.image} 
                         alt={project.title} 
-                        className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                        className={`w-full h-full transition-transform duration-700 ease-out group-hover:scale-105 ${
+                          project.title === "Platter" || project.title === "Bizzeazy" 
+                            ? "object-contain p-6" 
+                            : "object-cover"
+                        }`}
                         loading="lazy"
                       />
-                      <div className="absolute top-5 left-5 z-20 bg-background/80 backdrop-blur-md border border-white/10 px-3 py-1 rounded-full">
-                        <span className="text-[10px] sm:text-xs font-bold tracking-wider text-primary">{project.tag}</span>
-                      </div>
-                      <div className="absolute top-5 right-5 z-20 w-10 h-10 rounded-full bg-background/50 backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0 text-white hover:bg-primary/80">
-                        <ExternalLink size={16} />
-                      </div>
                    </div>
                    
                    <div className="p-6 sm:p-8 relative z-10 bg-gradient-to-b from-transparent to-card/50">
-                      <h3 className="text-xl sm:text-2xl font-bold mb-3 group-hover:text-primary transition-colors">{project.title}</h3>
-                      <p className="text-sm sm:text-base text-muted-foreground line-clamp-2">{project.description}</p>
+                      <h3 className="text-xl sm:text-2xl font-bold group-hover:text-primary transition-colors text-center">{project.title}</h3>
                    </div>
                 </motion.div>
              ))}

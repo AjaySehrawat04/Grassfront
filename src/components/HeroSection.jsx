@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { ArrowRight, Play, Zap, Cloud, Shield } from "lucide-react";
 import HeroRight from "@/components/HeroRight";
 
@@ -32,9 +33,9 @@ const HeroSection = () => {
             </p>
 
             <div className="flex flex-wrap gap-4 mb-12">
-              <a href="#contact" className="inline-flex items-center gap-2 px-7 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors">
+              <Link to="/register" className="inline-flex items-center gap-2 px-7 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors">
                 Start a Project <ArrowRight size={18} />
-              </a>
+              </Link>
               <button className="inline-flex items-center gap-2 px-7 py-3 rounded-lg font-medium border border-border text-foreground hover:border-primary/50 transition-colors">
                 <Play size={18} /> Watch Our Work
               </button>

@@ -1,3 +1,5 @@
+import logoImg from "@/assets/logo.jpeg";
+
 const Footer = () => {
   return (
     <footer className="border-t border-border py-6 px-4 md:px-8">
@@ -5,8 +7,13 @@ const Footer = () => {
         <div className="grid md:grid-cols-4 gap-8 mb-8">
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <span className="text-2xl font-black text-primary font-display">g</span>
-              <span className="text-lg font-bold tracking-tight text-foreground font-display">grass<span className="font-black">FRONT</span></span>
+              <a href="#" className="flex items-center">
+                <img
+                  src={logoImg}
+                  alt="grassFRONT"
+                  className="h-9 md:h-12 w-auto object-contain mix-blend-screen opacity-90 hover:opacity-100 transition-opacity"
+                />
+              </a>
             </div>
             <p className="text-sm text-muted-foreground">Building enterprise solutions that businesses rely on.</p>
           </div>
