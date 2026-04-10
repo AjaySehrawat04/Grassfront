@@ -9,7 +9,7 @@ const Register = () => {
     <div className="min-h-screen bg-background text-foreground flex flex-col">
       <Navbar />
       
-      <main className="flex-grow flex items-center justify-center pt-24 pb-12 px-4 relative overflow-hidden">
+      <main className="flex-grow flex items-center justify-center pt-16 sm:pt-20 md:pt-24 pb-12 px-4 relative overflow-hidden">
         {/* Background Glows */}
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-[120px] pointer-events-none" />
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-[120px] pointer-events-none" />
@@ -18,14 +18,14 @@ const Register = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="w-full max-w-xl bg-card/60 backdrop-blur-xl border border-border rounded-3xl p-8 md:p-12 shadow-2xl relative z-10"
+          className="w-full max-w-xl bg-card/60 backdrop-blur-xl border border-border rounded-3xl p-6 sm:p-8 md:p-12 shadow-2xl relative z-10"
         >
-          <div className="text-center mb-10">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-blue-500/30 bg-blue-500/10 text-[10px] font-bold text-primary uppercase tracking-widest mb-6">
+          <div className="text-center mb-6 sm:mb-8 md:mb-10">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-blue-500/30 bg-blue-500/10 text-[10px] font-bold text-primary uppercase tracking-widest mb-4">
               <span className="w-1.5 h-1.5 rounded-full bg-primary" />
               Create Account
             </div>
-            <h1 className="text-3xl md:text-5xl font-bold font-display mb-4">
+            <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold font-display mb-4">
               Start <span className="text-gradient-blue text-blue-400">Building</span> Today
             </h1>
             <p className="text-muted-foreground text-sm">
@@ -66,7 +66,7 @@ const Register = () => {
           </div>
 
           <form className="space-y-6">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <label className="text-xs font-bold text-muted-foreground uppercase tracking-widest">First Name</label>
                 <input 
@@ -94,7 +94,7 @@ const Register = () => {
               />
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <label className="text-xs font-bold text-muted-foreground uppercase tracking-widest">Password</label>
                 <input 
@@ -122,13 +122,13 @@ const Register = () => {
               />
             </div>
 
-            <div className="flex items-center gap-3 py-2">
+            <div className="flex items-start sm:items-center gap-3 py-2">
               <input 
                 type="checkbox" 
                 id="tos" 
-                className="w-4 h-4 rounded border-border bg-black/20 text-primary focus:ring-primary/20 cursor-pointer"
+                className="w-4 h-4 mt-0.5 sm:mt-0 rounded border-border bg-black/20 text-primary focus:ring-primary/20 cursor-pointer"
               />
-              <label htmlFor="tos" className="text-xs text-muted-foreground">
+              <label htmlFor="tos" className="text-xs text-muted-foreground leading-relaxed">
                 I agree to GrassFront's <Link to="#" className="text-primary hover:underline">Terms of Service</Link> and <Link to="#" className="text-primary hover:underline">Privacy Policy</Link>
               </label>
             </div>

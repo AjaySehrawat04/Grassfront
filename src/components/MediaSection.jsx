@@ -12,12 +12,12 @@ const articles = [
   { tag: "UPDATE", date: "MAY 30, 2024", img: blogAi, title: "What's Next at GrassFront", desc: "New capabilities. Bigger vision. Here's a glimpse of what's coming.", featured: false },
 ];
 
+
+
 const overviewArticles = [
-  { tag: "GLOBAL", date: "2024", img: blogCulture, title: "Global Impact Initiative", desc: "How we're empowering international enterprises with sustainable digital infrastructure.", featured: false },
-  { tag: "MISSION", date: "2024", img: blogAi, title: "Our Mission & Shared Values", desc: "The core principles that guide our product-first approach and delivery excellence.", featured: false },
-  { tag: "FEATURED", date: "2024", img: blogCulture, title: "The Future of Distributed Enterprise Systems", desc: "A deep dive into our vision for global scalability and cloud-native resilience.", featured: true },
-  { tag: "LEADER", date: "2024", img: blogAi, title: "Leadership Through Innovation", desc: "Meet the experts driving the next generation of intelligent software solutions.", featured: false },
-  { tag: "IMPACT", date: "2024", img: blogCulture, title: "Sustainability at Scale", desc: "Optimizing code and infrastructure for a more efficient and greener digital future.", featured: false },
+  { tag: "ABOUT", date: "2024", img: blogCulture, title: "Who We Are", desc: "We build modern websites, UI/UX experiences, and smart digital solutions.", featured: false },
+  { tag: "MISSION", date: "2024", img: blogAi, title: "Our Mission", desc: "To deliver scalable, user-friendly, and premium digital experiences.", featured: false },
+  { tag: "DELIVERY", date: "2024", img: blogCulture, title: "What We Deliver", desc: "Web development, creative design, smooth performance, and continuous support.", featured: false },
 ];
 
 const categories = [
@@ -67,37 +67,21 @@ const MediaSection = () => {
           </div>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 relative">
-          <AnimatePresence mode="wait">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeTab}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.4 }}
+            className={`grid grid-cols-1 sm:grid-cols-2 ${activeTab === 'announcements' ? 'lg:grid-cols-5' : 'lg:grid-cols-3'} gap-4 relative`}
+          >
             {displayData.map((a, i) => (
               <motion.div
-                key={`${activeTab}-${a.title}`}
-                initial={{
-                  opacity: 0,
-                  y: 20,
-                  filter: "blur(8px)",
-                  scale: 0.96,
-                }}
-                animate={{
-                  opacity: 1,
-                  y: 0,
-                  filter: "blur(0px)",
-                  scale: 1,
-                }}
-                exit={{
-                  opacity: 0,
-                  y: -20,
-                  filter: "blur(8px)",
-                  scale: 0.96,
-                  transition: { duration: 0.2 }
-                }}
-                viewport={{ once: true, margin: "-30px" }}
-                transition={{
-                  delay: i * 0.08,
-                  duration: 0.5,
-                  ease: [0.25, 0.46, 0.45, 0.94],
-                  filter: { duration: 0.8 },
-                }}
+                key={a.title}
+                initial={{ opacity: 0, y: 20, filter: "blur(8px)", scale: 0.96 }}
+                animate={{ opacity: 1, y: 0, filter: "blur(0px)", scale: 1 }}
+                transition={{ delay: i * 0.08, duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
                 className={`media-card rounded-xl glow-border bg-card overflow-hidden group cursor-pointer ${a.featured ? "sm:col-span-1 media-shimmer" : ""}`}
               >
                 <div className="relative h-40 overflow-hidden">
@@ -119,8 +103,8 @@ const MediaSection = () => {
                 </div>
               </motion.div>
             ))}
-          </AnimatePresence>
-        </div>
+          </motion.div>
+        </AnimatePresence>
 
         <div className="flex flex-wrap justify-center gap-4 mt-12">
           {categories.map((c, i) => (

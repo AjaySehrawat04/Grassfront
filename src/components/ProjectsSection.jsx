@@ -5,28 +5,39 @@ import { ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
 import imgBizzStudio from "@/assets/projects-Bizz-Studio.jpg";
 import imgHorecaMall from "@/assets/projects-Horeca-Mall.jpg";
 import imgPlatter from "@/assets/projects-Platter.jpg";
-import imgBizzeasy from "@/assets/projects-bizzeazy.jpg";
+import imgBizzeazy from "@/assets/projects-bizzeazy.jpg";
+import imgGrassFront from "@/assets/projects-grassFront.png";
 
 const projects = [
   {
     id: 1,
     title: "Bizz Studio",
+    description: "Creative digital studio crafting innovative designs and brand experiences",
     image: imgBizzStudio,
   },
   {
     id: 2,
     title: "Horeca Mall",
+    description: "Complete hospitality marketplace connecting hotels, restaurants, and catering suppliers",
     image: imgHorecaMall,
   },
   {
     id: 3,
     title: "Platter",
+    description: "Smart food ordering and restaurant management platform for seamless dining experiences",
     image: imgPlatter,
   },
   {
     id: 4,
     title: "Bizzeazy",
-    image: imgBizzeasy,
+    description: "Comprehensive business automation platform streamlining operations and boosting productivity",
+    image: imgBizzeazy,
+  },
+  {
+    id: 5,
+    title: "GrassFront",
+    description: "Building enterprise solutions that businesses rely on",
+    image: imgGrassFront,
   }
 ];
 
@@ -42,10 +53,10 @@ const ProjectsSection = () => {
 
     const scroll = () => {
       if (scrollContainer && !isHovered) {
-        scrollContainer.scrollLeft += 1; // Speed of auto-scroll
+        scrollContainer.scrollLeft += 1; 
+
+
         
-        // Reset scroll position if we've reached the end of the cloned items
-        // Since we duplicate the list once, when we scroll past half the width, we snap back
         if (scrollContainer.scrollLeft >= scrollContainer.scrollWidth / 2) {
           scrollContainer.scrollLeft = 0;
         }
@@ -132,27 +143,42 @@ const ProjectsSection = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-50px" }}
                   transition={{ duration: 0.5, delay: (idx % 3) * 0.1 }}
-                  className="min-w-[300px] sm:min-w-[380px] md:min-w-[420px] flex-shrink-0 group relative rounded-2xl bg-card border border-border overflow-hidden transition-all duration-500 hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(37,99,235,0.15)] snap-start lg:snap-align-none"
+                  className="min-w-[190px] sm:min-w-[220px] md:min-w-[250px] flex-shrink-0 group relative rounded-xl bg-card border border-border overflow-hidden transition-all duration-500 hover:shadow-[0_0_20px_rgba(37,99,235,0.1)] snap-start lg:snap-align-none"
                 >
                    {/* Glow border pseudo-element for hover */}
-                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl pointer-events-none" style={{ boxShadow: 'inset 0 0 0 1px hsl(217 91% 55% / 0.5)' }}></div>
+                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-xl pointer-events-none z-30" style={{ boxShadow: 'inset 0 0 0 1px hsl(217 91% 55% / 0.5)' }}></div>
                    
-                   <div className="h-56 sm:h-64 w-full overflow-hidden relative">
-                      <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500 z-10" />
+                   <div className="h-32 sm:h-40 w-full overflow-hidden relative">
+                      <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-500 z-10" />
+                      
+                      {/* Description Overlay */}
+                      <motion.div 
+                        initial={{ opacity: 0, y: 10 }}
+                        whileHover={{ opacity: 1, y: 0 }}
+                        className="absolute inset-0 z-20 flex flex-col items-center justify-center p-3 text-center bg-background/90 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all duration-300"
+                      >
+                        <p className="text-[10px] sm:text-xs text-foreground font-medium leading-tight">
+                          {project.description}
+                        </p>
+                        <div className="mt-2 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center text-primary border border-primary/20">
+                          <ExternalLink size={12} />
+                        </div>
+                      </motion.div>
+
                       <img 
                         src={project.image} 
                         alt={project.title} 
-                        className={`w-full h-full transition-transform duration-700 ease-out group-hover:scale-105 ${
-                          project.title === "Platter" || project.title === "Bizzeazy" 
-                            ? "object-contain p-6" 
+                        className={`w-full h-full transition-transform duration-700 ease-out group-hover:scale-110 ${
+                          project.title === "Platter" || project.title === "Bizzeazy" || project.title === "GrassFront"
+                            ? "object-contain p-8" 
                             : "object-cover"
                         }`}
                         loading="lazy"
                       />
                    </div>
                    
-                   <div className="p-6 sm:p-8 relative z-10 bg-gradient-to-b from-transparent to-card/50">
-                      <h3 className="text-xl sm:text-2xl font-bold group-hover:text-primary transition-colors text-center">{project.title}</h3>
+                   <div className="p-3 sm:p-4 relative z-10 bg-gradient-to-b from-transparent to-card/50">
+                      <h3 className="text-sm sm:text-base font-bold group-hover:text-primary transition-colors text-center">{project.title}</h3>
                    </div>
                 </motion.div>
              ))}

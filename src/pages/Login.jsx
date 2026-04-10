@@ -8,24 +8,24 @@ const Login = () => {
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col">
       <Navbar />
-      
-      <main className="flex-grow flex items-center justify-center pt-24 pb-12 px-4 relative overflow-hidden">
+
+      <main className="flex-grow flex items-center justify-center pt-16 sm:pt-20 md:pt-24 pb-12 px-4 relative overflow-hidden">
         {/* Background Glows */}
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-[120px] pointer-events-none" />
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-[120px] pointer-events-none" />
-        
-        <motion.div 
+
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="w-full max-w-lg bg-card/60 backdrop-blur-xl border border-border rounded-3xl p-8 md:p-12 shadow-2xl relative z-10"
+          className="w-full max-w-lg bg-card/60 backdrop-blur-xl border border-border rounded-3xl p-6 sm:p-8 md:p-12 shadow-2xl relative z-10"
         >
-          <div className="text-center mb-10">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-blue-500/30 bg-blue-500/10 text-[10px] font-bold text-primary uppercase tracking-widest mb-6">
+          <div className="text-center mb-6 sm:mb-8 md:mb-10">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-blue-500/30 bg-blue-500/10 text-[10px] font-bold text-primary uppercase tracking-widest mb-4">
               <span className="w-1.5 h-1.5 rounded-full bg-primary" />
               User Portal
             </div>
-            <h1 className="text-3xl md:text-5xl font-bold font-display mb-4">
+            <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold font-display mb-4">
               Welcome <span className="text-gradient-blue text-blue-400">Back</span>
             </h1>
             <p className="text-muted-foreground text-sm">
@@ -70,9 +70,9 @@ const Login = () => {
               <label className="text-xs font-bold text-muted-foreground uppercase tracking-widest">Work Email</label>
               <div className="relative">
                 <Mail size={16} className="absolute left-4 top-3.5 text-muted-foreground" />
-                <input 
-                  type="email" 
-                  placeholder="you@company.com" 
+                <input
+                  type="email"
+                  placeholder="you@company.com"
                   className="w-full bg-black/20 border border-border focus:border-primary/50 rounded-xl px-12 py-3 text-sm transition-all outline-none"
                 />
               </div>
@@ -85,9 +85,9 @@ const Login = () => {
               </div>
               <div className="relative">
                 <Lock size={16} className="absolute left-4 top-3.5 text-muted-foreground" />
-                <input 
-                  type="password" 
-                  placeholder="Your password" 
+                <input
+                  type="password"
+                  placeholder="Your password"
                   className="w-full bg-black/20 border border-border focus:border-primary/50 rounded-xl px-12 py-3 text-sm transition-all outline-none"
                 />
               </div>
