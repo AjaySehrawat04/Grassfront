@@ -1,6 +1,20 @@
 import logoImg from "@/assets/logo.jpeg";
+import { useLocation } from "react-router-dom";
 
 const Footer = () => {
+  const location = useLocation();
+  const isSlim = location.pathname !== "/";
+
+  if (isSlim) {
+    return (
+      <footer className="border-t border-border py-6 px-4 md:px-8">
+        <div className="container mx-auto text-center">
+          <p className="text-xs text-muted-foreground">© 2024 GrassFront. All rights reserved.</p>
+        </div>
+      </footer>
+    );
+  }
+
   return (
     <footer className="border-t border-border py-6 px-4 md:px-8">
       <div className="container mx-auto">

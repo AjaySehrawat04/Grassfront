@@ -36,7 +36,7 @@ const Navbar = () => {
   const profileRef = useRef(null);
   const location = useLocation();
   const navigate = useNavigate();
-  const isAuthPage = location.pathname === "/login" || location.pathname === "/register";
+  const isStandalonePage = location.pathname !== "/";
 
   useEffect(() => {
     const stored = localStorage.getItem("gf_user");
@@ -54,7 +54,7 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => {
-    if (isAuthPage) return;
+    if (isStandalonePage) return;
     const options = { root: null, rootMargin: "-30% 0px -60% 0px", threshold: 0 };
     const handleIntersect = (entries) => {
       entries.forEach((entry) => {
@@ -73,7 +73,7 @@ const Navbar = () => {
     window.addEventListener("scroll", handleScroll);
     handleScroll();
     return () => { observer.disconnect(); window.removeEventListener("scroll", handleScroll); };
-  }, [isAuthPage]);
+  }, [isStandalonePage]);
 
   const handleLogout = () => {
     localStorage.removeItem("gf_user");
@@ -100,9 +100,9 @@ const Navbar = () => {
         </Link>
 
         {/* Desktop Nav Links */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-5 lg:gap-6">
           {navLinks.map((link) => {
-            const isActive = !isAuthPage && (activeSection === link.id || (link.subLinks && link.subLinks.some(sub => sub.id === activeSection)));
+            const isActive = !isStandalonePage && (activeSection === link.id || (link.subLinks && link.subLinks.some(sub => sub.id === activeSection)));
             
             if (link.type === 'dropdown') {
               return (
@@ -124,7 +124,7 @@ const Navbar = () => {
                             {sub.label}
                           </Link>
                         ) : (
-                          <a key={sub.label} href={isAuthPage ? `/#${sub.id}` : `#${sub.id}`} className="block px-4 py-2.5 text-sm text-muted-foreground hover:text-foreground hover:bg-white/5 transition-all">
+                          <a key={sub.label} href={isStandalonePage ? `/#${sub.id}` : `#${sub.id}`} className="block px-4 py-2.5 text-sm text-muted-foreground hover:text-foreground hover:bg-white/5 transition-all">
                             {sub.label}
                           </a>
                         )
@@ -135,7 +135,7 @@ const Navbar = () => {
               );
             }
 
-            if (isAuthPage) {
+            if (isStandalonePage) {
               return (
                 <Link key={link.label} to={link.id === "home" ? "/" : `/#${link.id}`}
                   className="text-sm text-muted-foreground hover:text-foreground transition-colors">
@@ -157,18 +157,13 @@ const Navbar = () => {
           })}
         </div>
 
-        {/* Desktop Right: Auth or User */}
         <div className="hidden md:flex items-center gap-3">
           {user ? (
             <>
               <Link to="/project"
-                className="px-5 py-2 text-sm font-medium text-primary-foreground bg-primary rounded-full hover:bg-primary/90 transition-colors inline-flex items-center gap-1.5">
+                className="px-4 lg:px-5 py-2 text-sm font-medium text-primary-foreground bg-primary rounded-full hover:bg-primary/90 transition-colors inline-flex items-center gap-1.5">
                 + Start a Project
               </Link>
-              <button onClick={handleLogout}
-                className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground rounded-full border border-border hover:border-red-500/40 hover:text-red-400 transition-all flex items-center gap-1.5">
-                <LogOut size={14} /> Logout
-              </button>
               <div className="relative" ref={profileRef}>
                 <button onClick={() => setProfileOpen(!profileOpen)}
                   className="flex items-center gap-2 pl-1 pr-3 py-1 rounded-full border border-border hover:border-primary/50 transition-all bg-background/50">
@@ -255,7 +250,7 @@ const Navbar = () => {
             className="md:hidden border-t border-border bg-background overflow-hidden">
             <div className="flex flex-col gap-4 p-6">
               {navLinks.map((link) => {
-                const isActive = !isAuthPage && (activeSection === link.id || (link.subLinks && link.subLinks.some(sub => sub.id === activeSection)));
+                const isActive = !isStandalonePage && (activeSection === link.id || (link.subLinks && link.subLinks.some(sub => sub.id === activeSection)));
                 
                 if (link.type === 'dropdown') {
                   const isDropdownOpen = openDropdown === link.label;
@@ -281,7 +276,7 @@ const Navbar = () => {
                                    {sub.label}
                                  </Link>
                                ) : (
-                                 <a key={sub.label} href={isAuthPage ? `/#${sub.id}` : `#${sub.id}`} className="text-sm py-1.5 text-muted-foreground hover:text-foreground" onClick={() => setIsOpen(false)}>
+                                 <a key={sub.label} href={isStandalonePage ? `/#${sub.id}` : `#${sub.id}`} className="text-sm py-1.5 text-muted-foreground hover:text-foreground" onClick={() => setIsOpen(false)}>
                                    {sub.label}
                                  </a>
                                )
@@ -293,7 +288,7 @@ const Navbar = () => {
                   );
                 }
 
-                if (isAuthPage) {
+                if (isStandalonePage) {
                   return (
                     <Link key={link.label} to={link.id === "home" ? "/" : `/#${link.id}`}
                       className="text-sm text-muted-foreground hover:text-foreground transition-colors"

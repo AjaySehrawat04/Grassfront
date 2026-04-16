@@ -38,6 +38,8 @@ const ProjectPage = () => {
   const [user, setUser] = useState(null);
   const [step, setStep] = useState(1); // 1 = type, 2 = details, 3 = success
   const [selected, setSelected] = useState([]);
+  const [projectType, setProjectType] = useState("personal");
+  const [companyDetails, setCompanyDetails] = useState("");
   const [budget, setBudget] = useState("");
   const [timeline, setTimeline] = useState("");
   const [description, setDescription] = useState("");
@@ -128,6 +130,53 @@ const ProjectPage = () => {
                 initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -20 }} transition={{ duration: 0.3 }}>
                 <div className="bg-card/60 backdrop-blur-xl border border-border rounded-3xl p-6 sm:p-8 shadow-xl">
+                  
+                  <div className="mb-8 border-b border-border/50 pb-8">
+                    <h2 className="text-lg font-bold mb-2">Who is this project for?</h2>
+                    <p className="text-sm text-muted-foreground mb-4">Select whether this is a personal or company project.</p>
+
+                    <div className="flex flex-wrap gap-3">
+                      {[{ id: "personal", label: "Personal" }, { id: "company", label: "Company" }].map((type) => (
+                        <button
+                          key={type.id}
+                          type="button"
+                          onClick={() => {
+                            setProjectType(type.id);
+                            if (type.id === "personal") setCompanyDetails("");
+                          }}
+                          className={`px-5 py-2.5 rounded-full text-sm font-medium border transition-all ${
+                            projectType === type.id
+                              ? "border-primary/60 bg-primary/15 text-primary shadow-[0_0_15px_rgba(37,99,235,0.15)]"
+                              : "border-border bg-background/30 text-muted-foreground hover:border-border/60"
+                          }`}>
+                          {type.label}
+                        </button>
+                      ))}
+                    </div>
+
+                    <AnimatePresence>
+                      {projectType === "company" && (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0, marginTop: 0 }}
+                          animate={{ opacity: 1, height: "auto", marginTop: 16 }}
+                          exit={{ opacity: 0, height: 0, marginTop: 0 }}
+                          className="overflow-hidden"
+                        >
+                          <label className="text-xs font-bold text-muted-foreground uppercase tracking-widest block mb-2">
+                            Company Details
+                          </label>
+                          <input
+                            type="text"
+                            value={companyDetails}
+                            onChange={(e) => setCompanyDetails(e.target.value)}
+                            placeholder="Company Name, Industry, Website..."
+                            className="w-full bg-black/20 border border-border focus:border-primary/50 rounded-xl px-4 py-3 text-sm transition-all outline-none"
+                          />
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+
                   <h2 className="text-lg font-bold mb-2">What are you looking to build?</h2>
                   <p className="text-sm text-muted-foreground mb-6">Select all that apply — you can choose multiple.</p>
 
@@ -333,7 +382,7 @@ const ProjectPage = () => {
                   </div>
 
                   <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                    <button onClick={() => { setStep(1); setSelected([]); setDescription(""); setBudget(""); setTimeline(""); setProjectName(""); }}
+                    <button onClick={() => { setStep(1); setSelected([]); setProjectType("personal"); setCompanyDetails(""); setDescription(""); setBudget(""); setTimeline(""); setProjectName(""); }}
                       className="px-6 py-3 rounded-full border border-border text-sm font-medium hover:border-primary/50 transition-all">
                       Submit Another Project
                     </button>
