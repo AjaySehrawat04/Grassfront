@@ -33,7 +33,7 @@ const MediaSection = () => {
   const displayData = activeTab === 'announcements' ? articles : overviewArticles;
 
   return (
-    <section id="docs" className="section-padding relative overflow-hidden">
+    <section id="media-updates" className="section-padding relative overflow-hidden">
       <div className="container mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

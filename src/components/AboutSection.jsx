@@ -10,7 +10,7 @@ const features = [
 
 const AboutSection = () => {
   return (
-    <section id="features" className="relative section-padding overflow-hidden z-0 bg-[#05070d]">
+    <section id="about" className="relative section-padding overflow-hidden z-0 bg-[#05070d]">
       {/* Background (z-0) */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl pointer-events-none z-0" />
 

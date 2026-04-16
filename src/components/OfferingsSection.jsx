@@ -18,7 +18,7 @@ const offerings = [
 
 const OfferingsSection = () => {
   return (
-    <section id="pricing" className="section-padding relative">
+    <section id="what-we-offer" className="section-padding relative">
       <div className="container mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

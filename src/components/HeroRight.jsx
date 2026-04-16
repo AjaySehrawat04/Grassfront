@@ -160,22 +160,6 @@ const HeroRight = () => {
         <motion.img
           src={heroShowcase}
           alt="Grassfront 3D Showcase"
-          animate={{
-            y: [-18, 18, -18],
-            rotateZ: [-2, 2, -2],
-          }}
-          transition={{
-            y: {
-              duration: 4,
-              repeat: Infinity,
-              ease: "easeInOut"
-            },
-            rotateZ: {
-              duration: 4,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }
-          }}
           style={{
             width: "115%", // Slightly larger for impact
             height: "auto",

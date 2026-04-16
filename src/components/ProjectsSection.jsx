@@ -77,7 +77,7 @@ const ProjectsSection = () => {
   };
 
   return (
-    <section id="use-cases" className="section-padding relative overflow-hidden bg-background">
+    <section id="our-work" className="section-padding relative overflow-hidden bg-background">
       {/* Background ambient light */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-primary/5 blur-[120px] rounded-full pointer-events-none" />
 
