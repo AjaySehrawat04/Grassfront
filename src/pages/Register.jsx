@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { signInWithPopup } from "firebase/auth";
+import { googleProvider } from "@/lib/firebase";
 import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
@@ -93,10 +95,26 @@ const Register = () => {
 
           {/* Social Auth */}
           <button
-            onClick={() => {
-              const user = { email: "demo@gmail.com", firstName: "Demo", lastName: "User" };
-              localStorage.setItem("gf_user", JSON.stringify(user));
-              navigate("/project");
+            onClick={async () => {
+              setError("");
+              setLoading(true);
+              try {
+                const { signInWithPopup } = await import("firebase/auth");
+                const { auth, googleProvider } = await import("@/lib/firebase");
+                const result = await signInWithPopup(auth, googleProvider);
+                const user = result.user;
+                localStorage.setItem("gf_user", JSON.stringify({
+                  email: user.email,
+                  firstName: user.displayName?.split(" ")[0] || "",
+                  lastName: user.displayName?.split(" ").slice(1).join(" ") || "",
+                  photoURL: user.photoURL,
+                  uid: user.uid,
+                }));
+                navigate("/project");
+              } catch (err) {
+                setError("Google sign-up failed");
+              }
+              setLoading(false);
             }}
             className="w-full flex items-center justify-center gap-3 px-6 py-3 rounded-xl border border-border bg-background hover:bg-white/5 transition-all text-sm font-medium mb-8 group">
             <svg className="w-5 h-5" viewBox="0 0 24 24">

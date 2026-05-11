@@ -64,8 +64,8 @@ const ContactSection = () => {
             </div>
             <div className="grid sm:grid-cols-3 gap-6 p-8">
               {[
-                { icon: MapPin, title: "Our Office", lines: ["123 Innovation Drive", "Suite 500, Boston, MA", "02108, USA"] },
-                { icon: Clock, title: "Business Hours", lines: ["Monday - Friday", "9:00 AM - 6:00 PM", "(EST)"] },
+                { icon: MapPin, title: "Our Office", lines: ["Plot 23, MiQB Executive Coworking Space, Sector 18, Maruti Industrial Development Area, Gurugram, Haryana 122015"] },
+                { icon: Clock, title: "Business Hours", lines: ["Monday - Friday", "10:30 AM - 7:30 PM", "(EST)"] },
                 { icon: ShieldCheck, title: "Response Time", lines: ["We typically respond", "within 2 hours during", "business hours."] },
               ].map((info) => (
                 <div key={info.title} className="flex gap-3">
