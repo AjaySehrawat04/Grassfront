@@ -10,6 +10,7 @@ import NotFound from "./pages/NotFound";
 import ProjectPage from "@/pages/ProjectPage";
 import AboutFounder from "@/pages/AboutFounder";
 import CaseStudy from "@/pages/CaseStudy";
+import SupportChat from "@/components/SupportChat";
 
 const queryClient = new QueryClient();
 
@@ -29,6 +30,7 @@ const App = () => (
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
+        <SupportChat />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
